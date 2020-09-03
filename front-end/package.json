@@ -1,0 +1,47 @@
+{
+  "name": "lbweb",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:80",
+  "dependencies": {
+    "@material-ui/core": "^4.9.10",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "axios": "^0.19.2",
+    "contentful": "^7.14.6",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.5",
+    "node-sass": "^4.14.1",
+    "react": "^16.13.1",
+    "react-awesome-slider": "^4.1.0",
+    "react-dom": "^16.13.1",
+    "react-fda-nutrition-facts": "^0.1.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^3.4.3",
+    "react-scroll-parallax": "^2.3.4",
+    "react-slick": "^0.27.10",
+    "redux": "^4.0.5",
+    "slick-carousel": "^1.8.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

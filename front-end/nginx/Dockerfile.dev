@@ -1,0 +1,6 @@
+FROM nginx:alpine
+# Add the Nginx configuration file
+ADD ./nginx.dev.conf /etc/nginx/nginx.conf
+RUN mkdir logs 
+RUN cd ./logs && touch error.log && touch access.log
+EXPOSE 80

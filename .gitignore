@@ -4,7 +4,7 @@ slim/app/nbproject/private/
 
 
 # dependencies
-front-end/node_modules
+front-end/node_modules/
 front-end/.pnp
 front-end/.pnp.js
 
