@@ -1,0 +1,38 @@
+version: "3.7"
+services:
+   nginx-frontend:
+     build: 
+        context: ./front-end/nginx
+        dockerfile: Dockerfile.dev 
+     image: nginx-frontend_dev
+     container_name: nginx-frontend
+     ports:
+       - 80:80
+     depends_on:
+       - backend
+       - slim
+     command: nginx -g 'daemon off';
+   backend:
+      build: ./backend
+      container_name: backend
+      image: backend_dev
+      volumes: 
+        - './backend:/app'
+      environment:
+        - APP_NAME=backend
+        - ENV=dev
+      expose:
+        - 81 
+   slim:
+     build: ./slim
+     hostname: slim
+     container_name: slim
+     image: slim_dev
+     ports:
+       - 82:8002
+     expose:
+       - 8002
+     volumes:
+       - ./slim/app:/var/www
+       - ./slim/app/public:/var/www/html
+     command: /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
