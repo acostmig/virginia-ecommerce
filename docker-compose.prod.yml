@@ -15,6 +15,7 @@ services:
        - 443:443
      volumes:
        - frontend-app:/app/
+       - data:/data/
      depends_on:
        - backend
        - slim
@@ -65,3 +66,9 @@ volumes:
          o: bind
          type: none
          device: /home/ubuntu/virginia-ecommerce/slim/app/public
+    data:
+    driver: local
+    driver_opts:
+        o: bind
+        type: none
+        device: /home/ubuntu/virginia-ecommerce/data
