@@ -31,19 +31,19 @@ const useStyles = makeStyles((theme) => ({
 
 let itemID = 1
 let images = [{
-    path: `Images/ShopItems/${itemID}/1.jpg`,
+    path: `./Images/ShopItems/${itemID}/1.jpg`,
     id: 1
 },
 {
-    path: `Images/ShopItems/${itemID}/2.jpg`,
+    path: `./Images/ShopItems/${itemID}/2.jpg`,
     id: 2
 },
 {
-    path: `Images/ShopItems/${itemID}/3.jpg`,
+    path: `/Images/ShopItems/${itemID}/3.jpg`,
     id: 3
 },
 {
-    path: `Images/ShopItems/${itemID}/4.jpg`,
+    path: `/Images/ShopItems/${itemID}/4.jpg`,
     id: 4
 },
 
