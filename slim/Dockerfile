@@ -1,3 +1,10 @@
+FROM composer as builder
+WORKDIR /app/
+COPY composer.* ./
+RUN composer install
+
+COPY --from=builder /app/vendor /var/www/vendor
+
 FROM alpine:3.11
 LABEL Maintainer="Tim de Pater <code@trafex.nl>" \
   Description="Lightweight container with Nginx 1.16 & PHP-FPM 7.3 based on Alpine Linux."
