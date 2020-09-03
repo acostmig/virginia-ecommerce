@@ -52,16 +52,16 @@ volumes:
       driver_opts:
          o: bind
          type: none
-         device: C:/Users/Miguel/Desktop/Dev/front-end
+         device: /home/ubuntu/virginia-ecommerce/front-end
    slim-app:
       driver: local
       driver_opts:
          o: bind
          type: none
-         device: C:/Users/Miguel/Desktop/Dev/slim/app
+         device: /home/ubuntu/virginia-ecommerce/slim/app
    slim-public:
       driver: local
       driver_opts:
          o: bind
          type: none
-         device: C:/Users/Miguel/Desktop/Dev/slim/app/public
+         device: /home/ubuntu/virginia-ecommerce/slim/app/public
