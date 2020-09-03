@@ -66,9 +66,9 @@ volumes:
          o: bind
          type: none
          device: /home/ubuntu/virginia-ecommerce/slim/app/public
-    data:
-    driver: local
-    driver_opts:
-        o: bind
-        type: none
-        device: /home/ubuntu/virginia-ecommerce/data
+   data:
+       driver: local
+       driver_opts:
+          o: bind
+          type: none
+          device: /home/ubuntu/virginia-ecommerce/data
