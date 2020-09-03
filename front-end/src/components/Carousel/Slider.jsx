@@ -51,7 +51,7 @@ let images = [{
 
 
 const getSlider = () => {
-
+    console.log(images)
     return (
 
         <AwesomeSlider

@@ -14,7 +14,7 @@ services:
        - 80:80
        - 443:443
      volumes:
-       - frontend-app:/app/
+       - frontend-app:/usr/share/nginx/html
      depends_on:
        - backend
        - slim
