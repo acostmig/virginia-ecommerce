@@ -3,6 +3,10 @@ slim/app/src/settings.php
 slim/app/nbproject/private/
 data/
 
+
+*/__pycache__/*
+*__pycache__*
+
 .*
 # dependencies
 front-end/node_modules/
