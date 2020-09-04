@@ -7,5 +7,3 @@ RUN npm install --silent
 RUN npm install react-scripts  -g --silent
 
 RUN npm run-script build
-
-#CMD ["npm", "start"]
