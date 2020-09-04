@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 services:
    
    front-end:
@@ -42,8 +42,7 @@ services:
      expose:
        - 8002
      volumes:
-       - slim-app:/var/www
-       - slim-public:/var/www/html
+       - slim-logs:/var/www/logs
      command: /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
      
 
@@ -54,12 +53,12 @@ volumes:
          o: bind
          type: none
          device: /home/ubuntu/virginia-ecommerce/front-end
-   slim-app:
+   slim-logs:
       driver: local
       driver_opts:
          o: bind
          type: none
-         device: /home/ubuntu/virginia-ecommerce/slim/app
+         device: /home/ubuntu/virginia-ecommerce/slim/app/logs
    slim-public:
       driver: local
       driver_opts:

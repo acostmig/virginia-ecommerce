@@ -1,8 +1,9 @@
 slim/app/logs/
 slim/app/src/settings.php
 slim/app/nbproject/private/
+data/
 
-
+.*
 # dependencies
 front-end/node_modules/
 front-end/.pnp

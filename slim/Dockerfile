@@ -1,14 +1,14 @@
 FROM composer as builder
 WORKDIR /app/
-COPY composer.* ./
+COPY app/composer.* ./
 RUN composer install
 
-COPY --from=builder /app/vendor /var/www/vendor
 
 FROM alpine:3.11
 LABEL Maintainer="Tim de Pater <code@trafex.nl>" \
   Description="Lightweight container with Nginx 1.16 & PHP-FPM 7.3 based on Alpine Linux."
 
+COPY --from=builder /app/vendor /var/www/vendor
 # Install packages
 RUN apk --no-cache add php7 php7-fpm php7-opcache php7-mysqli php7-json php7-openssl php7-curl \
   php7-zlib php7-xml php7-phar php7-intl php7-dom php7-xmlreader php7-ctype php7-session \
@@ -31,6 +31,7 @@ COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # Setup document root
 RUN mkdir -p /var/www/html
 
+RUN mkdir -p /var/www/logs
 # Make sure files/folders needed by the processes are accessable when they run under the nobody user
 RUN chown -R nobody.nobody /var/www/html && \
   chown -R nobody.nobody /run && \
@@ -40,7 +41,7 @@ RUN chown -R nobody.nobody /var/www/html && \
 # Add application
 WORKDIR /var/www
 COPY --chown=nobody ./app          /var/www
-#COPY --chown=nobody ./app/public   /var/www/html
+COPY --chown=nobody ./app/public   /var/www/html
 
 COPY --chown=nobody --from=composer /usr/bin/composer /usr/bin/composer
 RUN composer install --optimize-autoloader --no-interaction --no-progress
