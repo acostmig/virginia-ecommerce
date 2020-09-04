@@ -66,7 +66,7 @@ Class LoginController
               
       
         $results += ['token' => $var=$this ->User->loginSuccess($username,  $results['user_id'], $request->getParsedBody()['ip_address']) ] ;
-        
+        $results += ['ip_address' =>$request->getParsedBody()['ip_address']];
         header('Content-Type: application/json');
 
       
