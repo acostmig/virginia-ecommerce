@@ -1,7 +1,5 @@
 <?php
 
-$app -> group('/api', function() use ($app)
-{
     $app -> group('/login', function () use ($app)
     {
 
@@ -15,6 +13,11 @@ $app -> group('/api', function() use ($app)
         $app ->get('/props', UserController::class.':getUserbyToken');
     });
 
+    $app -> group('/entity', function () use ($app)
+    {
+        $app ->get('/{id}', EntityController::class.':getEntity');
+
+    });
     $app -> group('/menu', function () use ($app)
     {
         $app ->get('/item/{itemid}', MenuController::class.':getItem');
@@ -31,5 +34,5 @@ $app -> group('/api', function() use ($app)
         
     
     });
-});
+
 ?>

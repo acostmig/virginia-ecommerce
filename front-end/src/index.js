@@ -20,7 +20,9 @@ window.$internal = { slim: 'http://localhost/api' };
 
 axios.interceptors.request.use((config) => {
 
+
   let token = localStorage.getItem('token');
+
 
   if (token) {
     return {
@@ -52,17 +54,7 @@ const routing = (
     <div>
       <ThemeProvider theme={Theme}>
         <App />
-        <div className="pages">
-          <Switch>
-            <Route path="/home" component={Home} />
-            <Route path="/about" component={About} />
-            <Route path="/login" component={Login} />
-            <Route path="/shop" component={ProductPage} />
 
-            <Route path="*" render={() => (<Redirect to="/home" />)} />
-
-          </Switch>
-        </div>
       </ThemeProvider >
 
     </div>

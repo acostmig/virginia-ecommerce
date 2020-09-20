@@ -15,6 +15,7 @@ import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import Alert from '@material-ui/lab/Alert';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import qs from 'qs'
 
 
 
@@ -52,14 +53,12 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3, 0, 2),
     },
     loading: {
-        position: 'relative',
-        marginLeft: '50%',
-        size: 40,
-        left: -20,
-        top: 10,
+        display: 'flex',
+        justifyContent: 'center',
         margin: theme.spacing(3, 0, 2),
 
     }
+
 }));
 
 
@@ -80,7 +79,8 @@ export default function SignIn() {
         return (emailRegex.test(username) || usernameRegex.test(username)) && password.length > 3;
 
     };
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
         if (rememberMe === true) {
             saveUsername();
@@ -88,22 +88,29 @@ export default function SignIn() {
         else {
             removeUsername();
         }
+
+        var bodyFormData = new FormData();
+        bodyFormData.append('username', username);
+        bodyFormData.append('password', password);
         setStatus("");
         setLoading(true);
-        axios.post("api/login", { username: username, password: password }).then(res => {
-            setRemoteAddress(res.data.ClientIP);
-            setError(false);
-            setStatus("Successful login!")
-            localStorage.setItem("token", res.data.token)
-            //redirect to dashboard
-        }).catch(error => {
-
-            setStatus(error.response.data);
-            setError(true);
-            //display error
-        }).finally(final => {
-            setLoading(false)
-        });
+        axios.post("api/login",
+            qs.stringify({ username: username, password: password }),
+            {
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).then(res => {
+                setRemoteAddress(res.data.ClientIP);
+                setError(false);
+                setStatus("Successful login!")
+                localStorage.setItem("token", res.data.token)
+                //redirect to dashboard
+            }).catch(error => {
+                setStatus(error.response?.data);
+                setError(true);
+                //display error
+            }).finally(final => {
+                setLoading(false)
+            });
     };
     async function saveUsername() {
         localStorage.username = username;
@@ -122,17 +129,17 @@ export default function SignIn() {
                 <Typography component="h1" variant="h5">
                     Sign in
         </Typography>
-                <form className={classes.form} action="api">
+                <form className={classes.form} onSubmit={handleSubmit}>
                     {status && <Alert severity={error ? "error" : "success"}>{status}</Alert>}
                     <TextField
                         variant="outlined"
                         margin="normal"
                         required
                         fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
+                        id="username"
+                        label="Username / Email Address"
+                        name="username"
+                        autoComplete="username"
                         value={username}
                         autoFocus
                         onChange={e => setUsername(e.target.value)}
@@ -153,20 +160,20 @@ export default function SignIn() {
                     />
                     <FormControlLabel
                         control={<Checkbox onChange={e => setRememberMe(e.target.checked)} defaultChecked={rememberMe} value={rememberMe} color="primary" />}
-                        label="Remember me"
+                        label="Remember Me"
                     />
-                    <div>
-                        Remote Address: {remoteAddress}
-                    </div>
-                    {loading ? <CircularProgress className={classes.loading} /> :
+
+                    {loading ? <div className={classes.loading}>
+                        <CircularProgress />
+                    </div> :
                         <Button
-                            type="button"
+                            type="submit"
                             fullWidth
                             variant="contained"
                             color="primary"
                             className={classes.submit}
                             disabled={!validateForm()}
-                            onClick={handleSubmit}
+
                         >
                             Sign In
                     </Button>

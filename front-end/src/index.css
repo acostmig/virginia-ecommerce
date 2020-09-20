@@ -11,17 +11,5 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.pages {
- 
-  margin-top: 120px;  
-  overflow-x: hidden;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-@media (max-width: 600px) {
-  .pages {
-    margin-top: 50px;
 
-  }
-};
 

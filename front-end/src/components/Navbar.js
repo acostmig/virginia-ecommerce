@@ -103,6 +103,8 @@ let buttons =
 const buttonItem = (name, href) => {
   return (
     <Button
+      key={name}
+      id={name}
       variant="text"
       color="primary"
       className={styles.headerButton}
@@ -116,7 +118,12 @@ const buttonItem = (name, href) => {
 //to be Used in drawer
 const menuItem = (name, href) => {
   return (
-    <MenuItem component="a" href={href} className={styles.drawerButton}>
+    <MenuItem
+      key={name}
+      id={name}
+      component="a"
+      href={href}
+      className={styles.drawerButton}>
       {name}
     </MenuItem>
   );
@@ -177,7 +184,7 @@ class NavBar extends React.Component {
           <AppBar
             position="fixed"
             elevation={0}
-            color="contrastText"
+            color="default"
             className={classes.appBar}
 
           >

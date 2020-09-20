@@ -47,6 +47,11 @@ $container['FileController'] = function ($c) {
     return new \app\src\controllers\FileController($c);    
 };
 
+$container['EntityController'] = function ($c) {
+   
+    return new \app\src\controllers\EntityController($c);    
+};
+
 $container['User'] = function ($c) {
    
     return new \app\src\services\User($c);    
@@ -60,5 +65,9 @@ $container['Menu'] = function ($c) {
 $container['File'] = function ($c) {
    
     return new \app\src\services\File($c);    
+};
+$container['Entity'] = function ($c) {
+   
+    return new \app\src\services\Entity($c);    
 };
 ?>

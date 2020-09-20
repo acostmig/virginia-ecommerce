@@ -22,36 +22,32 @@ const useStyles = makeStyles((theme) => ({
 
 
     },
-
-
-
-
-
 }));
 
-let itemID = 1
-let images = [{
-    path: `Images/shopItems/${itemID}/1.jpg`,
-    id: 1
-},
-{
-    path: `Images/shopItems/${itemID}/2.jpg`,
-    id: 2
-},
-{
-    path: `Images/shopItems/${itemID}/3.jpg`,
-    id: 3
-},
-{
-    path: `Images/shopItems/${itemID}/4.jpg`,
-    id: 4
-},
+const imagesFolder = require.context("../../../public", true)
 
-]
+//let itemID = 1
+// let images = [{
+//     path: imagesFolder(`./Images/shopItems/${itemID}/1.jpg`),
+//     id: 1
+// },
+// {
+//     path: `Images/shopItems/${itemID}/2.jpg`,
+//     id: 2
+// },
+// {
+//     path: `Images/shopItems/${itemID}/3.jpg`,
+//     id: 3
+// },
+// {
+//     path: `Images/shopItems/${itemID}/4.jpg`,
+//     id: 4
+// },
+
+// ]
 
 
-const getSlider = () => {
-    console.log(images)
+const getSlider = (imagePaths) => {
     return (
 
         <AwesomeSlider
@@ -62,24 +58,22 @@ const getSlider = () => {
         >
 
 
-            {images.map(image => {
-                return <div data-src={image.path} id={image.id} className={useStyles.image}></div>
+            {imagePaths.map(imagePath => {
+                return <div data-src={imagesFolder(imagePath)} className={useStyles.image}></div>
             })
             }
         </AwesomeSlider>
     )
 }
 
-export default function Slider() {
+export default function Slider(props) {
     const classes = useStyles();
 
 
     return (
-        <GridItem xs={12} sm={12} md={6} className={classes.gridItem}>
-            <Card carousel>
-                {getSlider()}
-            </Card>
-        </GridItem>
+        <Card carousel>
+            {getSlider(props.imagePaths)}
+        </Card>
 
 
     )

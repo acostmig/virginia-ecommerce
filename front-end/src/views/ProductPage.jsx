@@ -87,9 +87,16 @@ const useStyles = makeStyles((theme) => ({
         }
     },
 }));
-export default function ProductPage() {
+let images = [
+    "./Images/shopItems/1/1.jpg",
+    "./Images/shopItems/1/2.jpg",
+    "./Images/shopItems/1/3.jpg",
+    "./Images/shopItems/1/4.jpg"
+]
+export default function ProductPage(props) {
     const classes = useStyles();
 
+    const entityID = props.match.params.entityID;
     const [age, setAge] = React.useState('');
     const [open, setOpen] = React.useState(false);
 
@@ -132,12 +139,12 @@ export default function ProductPage() {
         <div id="container" className={classes.container}>
             <Card id="outerCard" card className={classes.outerCard}>
                 <GridContainer id="GridContainer" className={classes.gridContainer} >
-                    <Slider>
-
-                    </Slider>
+                    <GridItem xs={12} sm={12} md={6} className={classes.gridItem}>
+                        <Slider imagePaths={images} />
+                    </GridItem>
                     <GridItem xs={12} sm={12} md={6} className={classes.item}>
                         <Typography variant="h4" align="left" style={{ marginTop: "20px", fontWeight: "300" }}>
-                            <span> Virginia NYC Precious Bag</span>
+                            <span> Virginia NYC Precious Bag </span>
 
 
                         </Typography>
@@ -223,6 +230,7 @@ export default function ProductPage() {
                     </GridItem>
 
                 </GridContainer>
+
             </Card>
         </div >
     )

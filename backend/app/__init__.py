@@ -4,6 +4,8 @@ app = Flask(__name__)
 
 from app import views
 from .user import login
+from .entity import main
+
 from . import Globals, middleware
 
 from flask_cors import CORS

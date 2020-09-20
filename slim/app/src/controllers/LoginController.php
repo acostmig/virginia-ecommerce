@@ -18,7 +18,11 @@ Class LoginController
     
         $RequestBody = $request->getParsedBody();
      
-        if( empty($RequestBody['username']) || empty($RequestBody['password'])|| empty($RequestBody['ip_address']) )
+        if(empty($request->getAttribute('ip_address')))
+        {
+            return $this->app->response->withJson('Origin IP Address not found',400 ); 
+        }
+        if( empty($RequestBody['username']) || empty($RequestBody['password']))
         {
             return $this->app->response->withJson('Wrong Request Body',400 );      
         }
@@ -32,7 +36,7 @@ Class LoginController
                 return $this->app->response->withJson('Username or Password are incorrect',401 );
 
             }
-
+        
         $results = null;  
        
         if(password_verify($this->app['settings']['secret']['password'].$password, $this->User->getHashedPassword($username)))
@@ -65,8 +69,8 @@ Class LoginController
        }
               
       
-        $results += ['token' => $var=$this ->User->loginSuccess($username,  $results['user_id'], $request->getParsedBody()['ip_address']) ] ;
-        $results += ['ip_address' =>$request->getParsedBody()['ip_address']];
+        $results += ['token' => $var=$this ->User->loginSuccess($username,  $results['user_id'], $request->getAttribute('ip_address')) ] ;
+        $results += ['ip_address' =>$request->getAttribute('ip_address')];
         header('Content-Type: application/json');
 
       

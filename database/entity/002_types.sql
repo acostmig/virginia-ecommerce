@@ -1,0 +1,1 @@
+INSERT INTO Entity_Type values (null, "Shop Item");

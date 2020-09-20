@@ -3,7 +3,7 @@ from flask import request
 import requests
 
 
-@app.route("/api")
+@app.route("/api/open")
 def index():
 
     if request.environ.get('HTTP_X_FORWARDED_FOR') is None:

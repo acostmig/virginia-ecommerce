@@ -7,12 +7,10 @@ import json
 
 @app.route("/api/login", methods=['POST'])
 def login():
-    requestbody = request.get_json()
-
-    requestbody.update({'ip_address': Globals.getClientIP()})
+    requestbody = request.get_data()
 
     response = requests.post(
-        url=Globals.slim + "/api/login/authenticate", data=json.dumps(requestbody), headers={"content-type": "application/json"})
+        url=Globals.slim + "/login/authenticate", data=requestbody, headers={"content-type": "application/x-www-form-urlencoded"})
 
     if response.ok:
         return response.json()
