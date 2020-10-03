@@ -26,7 +26,7 @@ const getSlider = (imagePaths) => {
     return (
 
         <AwesomeSlider
-            cssModule={[Styles, AwsSliderStyles]}
+            cssModule={[Styles]}
             bullets={false}
             animation="scaleOutAnimation"
 
