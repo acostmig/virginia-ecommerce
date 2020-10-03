@@ -5,8 +5,9 @@ app = Flask(__name__)
 from app import views
 from .user import login
 from .entity import main
+from .stripe import main
 
-from . import Globals, middleware
+from . import Globals, middleware, Config
 
 from flask_cors import CORS
 

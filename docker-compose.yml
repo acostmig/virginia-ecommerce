@@ -11,6 +11,7 @@ services:
      depends_on:
        - backend
        - slim
+     environment:
      command: nginx -g 'daemon off';
    backend:
       build: ./backend
@@ -21,6 +22,7 @@ services:
       environment:
         - APP_NAME=backend
         - ENV=dev
+        - HOST=http://67.87.53.60:3000
       expose:
         - 81 
    slim:

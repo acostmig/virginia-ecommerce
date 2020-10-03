@@ -28,6 +28,7 @@ services:
       environment:
         - APP_NAME=backend
         - ENV=prod
+        - HOST=http://sbsnext.com
       expose:
         - 81
 

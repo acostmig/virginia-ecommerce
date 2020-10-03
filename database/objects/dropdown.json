@@ -1,0 +1,20 @@
+[
+  {
+    "displayName": "Color",
+    "id": "color",
+    "values": [
+      {
+        "displayName": "Gold",
+        "value": "gold"
+      },
+      {
+        "displayName": "Blue",
+        "value": "blue"
+      },
+      {
+        "displayName": "Red",
+        "value": "red"
+      }
+    ]
+  }
+]

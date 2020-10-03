@@ -9,7 +9,6 @@ import json
 def getEntity(id):
     response = requests.get(
         url=Globals.slim + f"/entity/{id}")
-
     if response.ok:
 
         return response.json()

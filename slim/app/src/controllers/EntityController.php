@@ -20,10 +20,10 @@ Class EntityController
         $results = ['id'=>$props['id']];
         $results += ['fields' => $this->Service->getEntity($props['id'])];
 
-        // if(empty($results['fields']))
-        // {
-        //     return $this->app->response->withJson('Entity Not Found',404 );
-        // }
+        if(empty($results['fields']))
+        {
+            return $this->app->response->withJson('Entity Not Found',404 );
+        }
         $fields =[];
         foreach($results['fields'] as &$field)
         {

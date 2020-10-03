@@ -11,4 +11,3 @@ def before():
                            "/api/login/renewsession", headers={'Authorization': request.headers.get("Authorization")})
         if res.status_code != 200:
             return res.text, res.status_code
-    print("before ran")

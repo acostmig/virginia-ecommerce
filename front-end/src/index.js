@@ -2,21 +2,46 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { Route, BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import axios from 'axios';
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import Theme from "./components/Theme";
 
-import Login from "./views/LoginPage";
-import Menu from "./views/MenuPage";
-import Home from "./views/HomePage";
-import ProductPage from "./views/ProductPage";
-import About from "./views/AboutPage"
+import cartReducer from './components/Cart/Reducer';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
 
 //window.$internal = { slim: 'http://35.174.39.18' };
 window.$internal = { slim: 'http://localhost/api' };
 
+const loadState = () => {
+  try {
+    const serializedState = localStorage.getItem('state');
+    if (serializedState === null) {
+      return undefined;
+    }
+
+    return JSON.parse(serializedState);
+  }
+  catch (e) {
+    return undefined;
+
+  }
+}
+const saveState = (state) => {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('state', serializedState);
+  } catch (e) {
+    // Ignore write errors;
+  }
+};
+
+const store = createStore(cartReducer);
+store.subscribe(() => {
+  saveState(store.getState());
+});
 
 axios.interceptors.request.use((config) => {
 
@@ -51,14 +76,16 @@ axios.interceptors.request.use((config) => {
 });
 const routing = (
   <Router>
-    <div>
-      <ThemeProvider theme={Theme}>
-        <App />
+    <Provider store={store}>
+      <div>
+        <ThemeProvider theme={Theme}>
+          <App />
 
-      </ThemeProvider >
+        </ThemeProvider >
 
-    </div>
-  </Router>
+      </div>
+    </Provider>
+  </Router >
 );
 
 ReactDOM.render(routing, document.getElementById("root"));

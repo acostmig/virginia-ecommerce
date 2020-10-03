@@ -8,12 +8,13 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Drawer from "@material-ui/core/Drawer";
 import MenuItem from "@material-ui/core/MenuItem";
 import Hidden from '@material-ui/core/Hidden';
-
-import { withStyles, useTheme } from "@material-ui/core/styles";
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from '@material-ui/core/Typography';
 import HideOnScroll from './HideOnScroll'
+import { connect } from 'react-redux'
 
 
 const drawerWidth = 240;
@@ -87,15 +88,15 @@ let buttons =
   [
     {
       'DisplayName': 'Home',
-      'href': 'home'
+      'href': '/home'
     },
     {
       'DisplayName': 'Shop',
-      'href': 'shop'
+      'href': '/shop'
     },
     {
       'DisplayName': 'About',
-      'href': 'about'
+      'href': '/about'
     },
 
   ]
@@ -174,7 +175,6 @@ class NavBar extends React.Component {
 
   handleClose = () => this.setState({ open: false });
 
-
   render() {
     const { classes } = this.props;
     return (
@@ -203,7 +203,12 @@ class NavBar extends React.Component {
               <Typography className={classes.header} variant="h5" noWrap>
                 Virginia Florian
           </Typography>
+              <Button href="/cart">
+                {}
+                <ShoppingCartIcon style={this.props.addedEntitiesSize > 0 ? { color: "red" } : {}}>
 
+                </ShoppingCartIcon>
+              </Button>
             </Toolbar>
             <Toolbar className={classes.toolbar2}>
               {menuButtons()}
@@ -221,7 +226,7 @@ class NavBar extends React.Component {
         > <Hidden smUp>
             {menuButtons('MenuItems')}
           </Hidden>
-          {menuItem('Sign In', 'Login')}
+          {menuItem('Sign In', '/Login')}
 
         </Drawer>
       </div >
@@ -233,5 +238,10 @@ NavBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(NavBar);
+const mapStateToProps = (state) => {
+  return {
+    addedEntitiesSize: state.addedEntities.length,
+  }
+}
+export default connect(mapStateToProps)(withStyles(styles)(NavBar));
 

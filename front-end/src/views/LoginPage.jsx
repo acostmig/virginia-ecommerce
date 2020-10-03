@@ -68,7 +68,6 @@ export default function SignIn() {
     const [username, setUsername] = useState(localStorage.username);
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(true)
-    const [remoteAddress, setRemoteAddress] = useState("")
     const [status, setStatus] = useState("");
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -99,7 +98,6 @@ export default function SignIn() {
             {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).then(res => {
-                setRemoteAddress(res.data.ClientIP);
                 setError(false);
                 setStatus("Successful login!")
                 localStorage.setItem("token", res.data.token)
