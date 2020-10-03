@@ -42,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
         width: "100%",
         "@media (min-width: 576px)": {
             maxWidth: "500px"
-
         },
         "@media (min-width: 768px)": {
             maxWidth: "620px"
@@ -73,7 +72,6 @@ const useStyles = makeStyles((theme) => ({
     },
     addToCartButton: {
         color: 'primary',
-        position: "absolute",
         bottom: 0,
         right: 0,
         backgroundColor: customTheme.palette.gold,
@@ -82,7 +80,8 @@ const useStyles = makeStyles((theme) => ({
         "&:hover": {
             backgroundColor: customTheme.palette.gold,
             color: customTheme.palette.primary.contrastText
-        }
+        },
+        marginTop: "20px"
     },
     loading: {
         display: 'flex',
@@ -210,9 +209,6 @@ export default function ProductPage(props) {
                                     <Dropdown object={dropdown}></Dropdown>
                                 </FormControl>
                             })}
-
-
-
 
                             <Button
                                 className={classes.addToCartButton}
