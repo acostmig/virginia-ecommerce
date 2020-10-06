@@ -102,6 +102,17 @@ const Cart = (state = getState(), action) => {
                 }
                 break;
             }
+        case "EMPTY":
+            {
+                if (state.addedEntities.length != 0) {
+                    return {
+                        ...state,
+                        addedEntities: [],
+                        totalPrice: 0
+                    }
+                }
+                break;
+            }
 
     }
     return state;

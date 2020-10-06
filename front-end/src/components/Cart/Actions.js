@@ -23,3 +23,8 @@ export const RemoveEntity = (entity) => {
         id: entity.id
     }
 }
+export const Empty = () => {
+    return {
+        type: "EMPTY",
+    }
+}

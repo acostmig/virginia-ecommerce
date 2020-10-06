@@ -11,7 +11,6 @@ import TableRow from '@material-ui/core/TableRow'
 import Card from '../Containers/Card'
 import Button from '@material-ui/core/Button'
 import CardMedia from '@material-ui/core/CardMedia';
-
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
@@ -34,27 +33,18 @@ const styles = theme => ({
             display: "none",
 
         },
-        // "@media (min-width: 992px)": {
-        //     width: "80%",
-        // },
-        // "@media (min-width: 1200px)": {
-        //     width: "70%",
-        // },
     },
     tableCell: {
         "@media (max-width: 768px)": {
             display: "block",
 
         },
-        // "@media (min-width: 768px)": {
-        //     display: "block",
-        // },
-        // "@media (min-width: 992px)": {
-        //     width: "80%",
-        // },
-        // "@media (min-width: 1200px)": {
-        //     width: "70%",
-        // },
+    },
+    cellDescription: {
+        "@media (min-width: 768px)": {
+            display: "none",
+
+        },
     },
     image: {
         "@media (max-width: 576px)": {
@@ -72,9 +62,7 @@ const styles = theme => ({
     }
 })
 
-const cellStyle = {
-    //display: "block"
-}
+
 class Cart extends Component {
 
     //to remove the item completely
@@ -97,10 +85,6 @@ class Cart extends Component {
                 this.props.entities.map(entity => {
                     return (
                         <TableRow key={entity.id}>
-                            {/* <div style={{ position: "fixed", display: "block", minWidth: "100%" }}>
-                                <img src={imagesFolder(entity.fields.imagePath.value[0])} title={entity.fields.imagePath.value[0]} style={{ width: "300px" }} />
-                            </div> */}
-                            {/* <TableCell align="center" style={{ position: "fixed", display: "block" }}> */}
                             <TableCell align="center" >
                                 <img src={imagesFolder(entity.fields.imagePath.value[0])} title={entity.fields.imagePath.value[0]} className={classes.image} />
                             </TableCell>
@@ -109,7 +93,7 @@ class Cart extends Component {
                             </TableCell>
                             <TableCell align="center" className={classes.tableCell}>
                                 <p>
-                                    <b>${entity.fields.price.value}</b>
+                                    <span className={classes.cellDescription}>Price:</span> <b>${entity.fields.price.value}</b>
                                 </p>
                             </TableCell>
                             <TableCell align="center" className={classes.tableCell}>
@@ -121,7 +105,7 @@ class Cart extends Component {
 
                             </TableCell>
                             <TableCell align="center" className={classes.tableCell}>
-                                ${entity.fields.price.value * entity.quantity}
+                                <span className={classes.cellDescription}>Total:</span> <b>${entity.fields.price.value * entity.quantity}</b>
                             </TableCell>
                             <TableCell align="center" className={classes.tableCell}>
                                 <Button onClick={() => { this.handleRemove(entity) }}><DeleteForeverIcon /></Button>
@@ -143,7 +127,7 @@ class Cart extends Component {
                         <TableHead className={classes.tableHead}>
                             <TableRow>
                                 <TableCell align="center" style={{ width: "10%" }}></TableCell>
-                                <TableCell align="center">Product</TableCell>
+                                <TableCell align="center">Title</TableCell>
                                 <TableCell align="center">Price</TableCell>
                                 <TableCell align="center">Quantity</TableCell>
                                 <TableCell align="center">Total</TableCell>
@@ -155,7 +139,6 @@ class Cart extends Component {
                         </TableBody>
                     </Table>
                 </TableContainer>
-
             </div>
         )
     }
@@ -165,7 +148,8 @@ class Cart extends Component {
 const mapStateToProps = (state) => {
     return {
         entities: state.addedEntities,
-        total: state.totalPrice
+        total: state.totalPrice,
+        cartSize: state.addedEntities.length
         //addedItems: state.addedItems
     }
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import Cart from '../components/Cart/main'
-import { AddEntity } from '../components/Cart/Actions'
+import { Empty } from '../components/Cart/Actions'
 import { useDispatch, useSelector } from "react-redux";
 import { getEntity } from '../globals/Entity';
 import Card from '../components/Containers/Card'
@@ -10,12 +10,13 @@ import customTheme from '../components/Theme'
 import axios from 'axios';
 import { loadStripe } from "@stripe/stripe-js";
 import Alert from '@material-ui/lab/Alert';
-
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { makeStyles } from '@material-ui/core/styles';
 
 const styles = makeStyles((theme) => ({
 
     outterCard: {
+        padding: "25px",
         display: "inline-block",
         "@media (max-width: 576px)": {
             width: "100%",
@@ -45,6 +46,27 @@ const styles = makeStyles((theme) => ({
             color: theme.palette.primary.contrastText
         }
     },
+    empty: {
+        height: "30%",
+        width: "30%",
+
+        "@media (max-width: 768px)": {
+            height: "50%",
+            width: "50%"
+
+        },
+
+    },
+    mainButton: {
+        color: 'primary',
+        size: 'lg',
+        backgroundColor: customTheme.palette.gold,
+        "&:hover": {
+            backgroundColor: customTheme.palette.gold,
+            color: customTheme.palette.primary.contrastText
+        }
+    },
+
 }))
 const stripePromise = loadStripe("pk_test_51HWtqXHGjtLJRyhClejcgkSj5MzEFomgJbNF6KDGC3V02th0KCLFKMT4r7TTKW75Xz3Fh9Rf2WLwks1jw2IVKU9Z00cBpBbW6U");
 
@@ -70,7 +92,31 @@ const handleClick = async (state) => {
         // using `result.error.message`.
     }
 };
+function EmptyCart(props) {
 
+    return (
+        <div>
+
+            <AddShoppingCartIcon
+                href="/home"
+                className={styles().empty}
+            />
+            <h1>
+                Your Cart Is Empty
+            </h1>
+            <h5>
+                Please add some items to the cart!
+            </h5>
+            <Button
+                className={styles().mainButton}
+                href="/shop"
+            >
+                <i className={styles().mainButton} />
+                            Start Shopping
+            </Button>
+        </div>
+    );
+}
 export default function CartPage() {
     const classes = styles(customTheme);
     const [message, setMessage] = useState("");
@@ -82,10 +128,11 @@ export default function CartPage() {
         if (query.get("success")) {
             setMessage("Order placed! You will receive an email confirmation.");
             setSuccess(true)
+            dispatch(Empty())
         }
         if (query.get("canceled")) {
             setMessage(
-                "Order canceled -- continue to shop around and checkout when you're ready."
+                "Order canceled - please continue to shop around and checkout when you're ready."
             );
             setSuccess(false)
 
@@ -101,27 +148,29 @@ export default function CartPage() {
     return (
         <div style={{ textAlign: "center" }}>
             <Card className={classes.outterCard}>
-                <div>
-                    {message && <Alert style={{ justifyContent: "center" }} severity={success ? "success" : "error"}>{message}</Alert>}
-                    <Cart />
-                    <div className={classes.checkout}>
+                {message && <Alert style={{ justifyContent: "center" }} severity={success ? "success" : "error"}>{message}</Alert>}
+                {subtotal == 0 ? <EmptyCart /> :
+                    <div>
+                        <Cart />
+                        <div className={classes.checkout}>
 
-                        <p>
-                            <b>
-                                <span style={(tax === null || tax === 0) ? { display: "none" } : {}}>
-                                    Subtotal: {subtotal === null ? 0 : subtotal.toFixed(2)}</span><br />
-                                <span style={(tax === null || tax === 0) ? { display: "none" } : {}} >
-                                    Tax: {tax === 0 ? 0 : tax.toFixed(2)}
-                                </span><br />
-                                <span>Total: {total.toFixed(2)}</span><br />
+                            <p>
+                                <b>
+                                    <span style={(tax === null || tax === 0) ? { display: "none" } : {}}>
+                                        Subtotal: {subtotal === null ? 0 : subtotal.toFixed(2)}</span><br />
+                                    <span style={(tax === null || tax === 0) ? { display: "none" } : {}} >
+                                        Tax: {tax === 0 ? 0 : tax.toFixed(2)}
+                                    </span><br />
+                                    <span>Total: {total.toFixed(2)}</span><br />
 
-                            </b>
-                        </p>
-                        <Button className={classes.checkoutButton} onClick={() => handleClick(state)}>
-                            Checkout
+                                </b>
+                            </p>
+                            <Button className={classes.checkoutButton} onClick={() => handleClick(state)}>
+                                Checkout
                         </Button>
+                        </div>
                     </div>
-                </div>
+                }
             </Card>
         </div >
     )

@@ -107,7 +107,7 @@ export default function Login() {
                             <br />
                             <Button
                                 className={classes.mainButton}
-                                href="shop"
+                                href="/shop"
                             >
                                 <i className={classes.mainButton} />
                             Start Shopping
