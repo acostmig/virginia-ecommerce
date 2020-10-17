@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Background from '../Images/background.jpg'
-import LandingImage from '../Images/LandingImage.jpg'
 
 import GridContainer from '../components/Containers/GridContainer'
 import GridItem from '../components/Containers/GridItem'
@@ -9,6 +7,8 @@ import Button from "@material-ui/core/Button";
 
 import { makeStyles } from '@material-ui/core/styles';
 import customTheme from '../components/Theme'
+
+const imagesFolder = require.context("../../public/Images", true)
 
 const useStyles = makeStyles((theme) => ({
 
@@ -20,12 +20,14 @@ const useStyles = makeStyles((theme) => ({
 
     },
     image: {
-        'backgroundImage': `url(${Background})`,
+        'backgroundImage': `url(${imagesFolder("./LogoName.png")})`,
         backgroundRepeat: 'space',
         backgroundAttachment: 'scroll',
         backgroundPosition: 'center center',
+        backgroundRepeat: 'no-repeat',
+
         opacity: 0.5,
-        'backgroundSize': 'cover',
+        'backgroundSize': '200px',
 
         height: '100%',
         width: '100%',
@@ -38,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     },
     landingImage: {
         opacity: 1,
-        'backgroundImage': `url(${LandingImage})`,
+        'backgroundImage': `url(${imagesFolder("./LandingImage.jpg")})`,
         height: '100%',
         width: '100%',
         position: 'absolute',

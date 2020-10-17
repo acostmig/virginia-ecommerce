@@ -8,9 +8,10 @@ import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from "../Containers/Card";
+import './slider.css';
 
 
-import Styles from "./Styles"
+
 const useStyles = makeStyles((theme) => ({
 
     prevButton: {
@@ -31,6 +32,7 @@ const settings = {
     dots: true,
     infinite: true,
     accessibility: true,
+    adaptiveHeight: true,
     arrows: true,
     centerPadding: "50px",
     speed: 500,
@@ -65,12 +67,17 @@ function SamplePrevArrow(props) {
 }
 const getSlider = (imagePaths) => {
     return (
-        <div>
+        <div id="ReactSlick">
             <ReactSlick
                 {...settings}
             >
                 {imagePaths?.map(imagePath => {
-                    return <img src={imagesFolder(imagePath)} className={useStyles.image} width="100%"></img>
+                    try {
+                        return <img src={imagesFolder(imagePath)} className={useStyles.image} width="100%"></img>
+                    }
+                    catch (e) {
+
+                    }
                 })
                 }
             </ReactSlick>
@@ -89,4 +96,5 @@ export default function Slider(props) {
 
 
     )
+
 }

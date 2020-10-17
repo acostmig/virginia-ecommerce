@@ -24,9 +24,9 @@ import qs from 'qs'
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Acosta LLC
+            {'Powered By © '}
+            <Link color="inherit" href="http://sbsnext.com/">
+                SBSNext
       </Link>{' '}
             {new Date().getFullYear()}
             {'.'}

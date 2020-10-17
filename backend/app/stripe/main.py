@@ -30,7 +30,7 @@ def create_checkout_session():
                         },
                     },
                     'quantity': entity["quantity"],
-                    # 'tax_rates':['txr_1HYFsyHGjtLJRyhChrt2S67P'],
+                    'tax_rates':['txr_1HYFsyHGjtLJRyhChrt2S67P'],
                 } for entity in entities
             ],
             mode='payment',

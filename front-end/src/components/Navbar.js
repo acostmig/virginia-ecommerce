@@ -201,7 +201,7 @@ class NavBar extends React.Component {
                 </IconButton>
               </div>
               <Typography className={classes.header} variant="h5" noWrap>
-                Virginia Florian
+                Ecommerce
           </Typography>
               <Button href="/cart">
                 {}
